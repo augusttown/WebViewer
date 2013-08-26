@@ -76,7 +76,7 @@ function owgImageLayer()
       var sFilename = this.servers[this.curserver] + "/" + this.layer + "/tiles/" +
                       res.lod + "/" + 
                       res.x + "/" + 
-                      res.y + this.dsi.sFileExtension;
+                      res.y + this.dsi.sFileExtension + ((this.token == null) ? "" : ("?" + this.token));
                                 
       var ImageTexture = new Texture(engine);  
       ImageTexture.quadcode = quadcode;   // store quadcode in texture object
@@ -149,7 +149,7 @@ function owgImageLayer()
    
    //---------------------------------------------------------------------------
    
-   this.Setup = function(servers, layer, transparency)
+   this.Setup = function(servers, layer, transparency, token)
    {
       if (transparency == null)
       {
@@ -158,16 +158,21 @@ function owgImageLayer()
       else
       {
          this.transparency = transparency;
-      }
+      }                
       this.servers = servers;
       this.layer = layer;
+      if (token) {
+    	  this.token = token;
+      } else {
+    	  this.token = "";
+      }      
      /* Example for i3d Tile-Service.
         World500 Data is located at http://www.openwebglobe.org/data/img/
         
         server="http://www.openwebglobe.org/data/img/"
         layer="World500"
       */
-      var datasetfile = servers[0] + "/" + layer + "/layersettings.json";
+      var datasetfile = servers[0] + "/" + layer + "/layersettings.json" + ((this.token == null) ? "" : ("?" + this.token));      	
       this.dsi.Download(datasetfile);
    }
 }

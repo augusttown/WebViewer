@@ -312,7 +312,7 @@ GlobeRenderer.prototype.AddImageLayer = function(options)
             {
                imgLayer.usermaxlod = options["maxlod"];
             }
-            imgLayer.Setup(options["url"], layer, options["transparency"]);
+            imgLayer.Setup(options["url"], layer, options["transparency"], options["token"]);
             index = this.imagelayerlist.length;
             this.imagelayerlist.push(imgLayer);
             this._UpdateLayers();
